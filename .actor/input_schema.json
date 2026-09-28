@@ -1,0 +1,198 @@
+{
+    "$schema": "https://apify.com/schemas/v1/input.ide.json",
+    "title": "TextHumanize input",
+    "description": "Enter the text (or a batch of texts) to process and pick a mode. Results are stored in the default dataset, and a run summary is saved to the key-value store under the SUMMARY key. Humanization options are ignored in 'Detect' and 'Analyze' modes.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "mode": {
+            "title": "Mode",
+            "type": "string",
+            "description": "**Humanize** rewrites AI-sounding text so it reads more naturally, **Detect** estimates how AI-like a text is, and **Analyze** returns style and artificiality metrics.",
+            "editor": "select",
+            "enum": ["humanize", "detect", "analyze"],
+            "enumTitles": [
+                "Humanize — rewrite text to sound human",
+                "Detect — estimate AI probability",
+                "Analyze — style and artificiality metrics"
+            ],
+            "default": "humanize"
+        },
+        "text": {
+            "title": "Text",
+            "type": "string",
+            "description": "Single text to process. Ignored when the batch field below is filled.",
+            "editor": "textarea",
+            "prefill": "In today's fast-paced digital landscape, businesses must leverage comprehensive strategies to unlock their full potential. It is important to note that effective communication serves as a cornerstone of success, facilitating collaboration and driving innovation across teams. Furthermore, organizations that prioritize adaptability are well-positioned to navigate challenges and seize emerging opportunities in an ever-evolving marketplace."
+        },
+        "texts": {
+            "title": "Texts (batch)",
+            "type": "array",
+            "description": "Optional list of texts processed in a single run. When filled, the 'Text' field is ignored and each item is processed separately.",
+            "editor": "stringList",
+            "items": {
+                "type": "string"
+            }
+        },
+        "language": {
+            "sectionCaption": "Language & style",
+            "title": "Language",
+            "type": "string",
+            "description": "Language of the input text, or 'Detect automatically' to let the Actor identify it. 25 languages have dedicated dictionaries; other ISO codes fall back to the universal processor.",
+            "editor": "select",
+            "enum": [
+                "auto",
+                "ar",
+                "cs",
+                "da",
+                "de",
+                "en",
+                "es",
+                "fr",
+                "he",
+                "hi",
+                "hu",
+                "id",
+                "it",
+                "ja",
+                "ko",
+                "nl",
+                "pl",
+                "pt",
+                "ro",
+                "ru",
+                "sv",
+                "th",
+                "tr",
+                "uk",
+                "vi",
+                "zh"
+            ],
+            "enumTitles": [
+                "Detect automatically",
+                "Arabic",
+                "Czech",
+                "Danish",
+                "German",
+                "English",
+                "Spanish",
+                "French",
+                "Hebrew",
+                "Hindi",
+                "Hungarian",
+                "Indonesian",
+                "Italian",
+                "Japanese",
+                "Korean",
+                "Dutch",
+                "Polish",
+                "Portuguese",
+                "Romanian",
+                "Russian",
+                "Swedish",
+                "Thai",
+                "Turkish",
+                "Ukrainian",
+                "Vietnamese",
+                "Chinese"
+            ],
+            "default": "auto"
+        },
+        "profile": {
+            "title": "Profile",
+            "type": "string",
+            "description": "Style profile that guides the rewrite. 'Web' is a good default for articles and blog posts; 'SEO' is the most conservative.",
+            "editor": "select",
+            "enum": ["chat", "web", "seo", "docs", "formal", "academic", "marketing", "social", "email"],
+            "enumTitles": [
+                "Chat — casual conversational tone",
+                "Web — neutral web content (default)",
+                "SEO — conservative, SEO-safe",
+                "Docs — technical documentation",
+                "Formal — formal tone",
+                "Academic — academic style",
+                "Marketing — marketing copy",
+                "Social — social media posts",
+                "Email — emails and replies"
+            ],
+            "default": "web"
+        },
+        "targetStyle": {
+            "title": "Target style (optional)",
+            "type": "string",
+            "description": "Optional author style to imitate: student, copywriter, scientist, journalist, blogger, editor, founder, expert or support.",
+            "editor": "textfield"
+        },
+        "intensity": {
+            "sectionCaption": "Humanization options",
+            "title": "Intensity",
+            "type": "integer",
+            "description": "How aggressively the text is rewritten: 0 leaves the text untouched, 100 is the maximum. Around 60 is a good balance for most texts.",
+            "editor": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "default": 60
+        },
+        "qualityGate": {
+            "title": "Quality gate",
+            "type": "string",
+            "description": "With 'Strict', the Actor reverts changes when they would reduce similarity, grammar score or readability.",
+            "editor": "select",
+            "enum": ["none", "strict"],
+            "enumTitles": ["None", "Strict — revert harmful changes"],
+            "default": "none"
+        },
+        "minimal": {
+            "title": "Minimal changes",
+            "type": "boolean",
+            "description": "Only rewrite sentences flagged as AI-like and leave everything else untouched.",
+            "default": false
+        },
+        "phantom": {
+            "title": "PHANTOM™ post-processing",
+            "type": "boolean",
+            "description": "Run the PHANTOM™ neural optimization pass to push AI-detection scores lower. Slower, but stronger.",
+            "default": false
+        },
+        "includeDetection": {
+            "sectionCaption": "Analysis & performance",
+            "title": "Include AI detection",
+            "type": "boolean",
+            "description": "Compute AI-detection probability before and after humanization (adds processing time). Only used in 'Humanize' mode.",
+            "default": true
+        },
+        "seed": {
+            "title": "Seed",
+            "type": "integer",
+            "description": "Optional random seed for reproducible output. In batch mode each text uses seed + its position.",
+            "editor": "number"
+        },
+        "keepKeywords": {
+            "title": "Keep keywords",
+            "type": "array",
+            "description": "SEO keywords that must be preserved in the rewritten text.",
+            "editor": "stringList",
+            "items": {
+                "type": "string"
+            }
+        },
+        "protectTerms": {
+            "title": "Protect terms",
+            "type": "array",
+            "description": "Brand names, product names and other terms that must never be modified.",
+            "editor": "stringList",
+            "items": {
+                "type": "string"
+            }
+        },
+        "concurrency": {
+            "title": "Batch concurrency",
+            "type": "integer",
+            "description": "How many texts to process in parallel in batch mode (1-8). Higher values improve throughput on large batches.",
+            "editor": "number",
+            "minimum": 1,
+            "maximum": 8,
+            "default": 1
+        }
+    }
+}

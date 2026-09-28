@@ -1,0 +1,69 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Processed texts",
+            "transformation": {
+                "fields": [
+                    "index",
+                    "type",
+                    "language",
+                    "qualityScore",
+                    "aiProbabilityBefore",
+                    "aiProbabilityAfter",
+                    "aiProbability",
+                    "verdict",
+                    "original",
+                    "result"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "index": {
+                        "label": "Index",
+                        "format": "number"
+                    },
+                    "type": {
+                        "label": "Mode",
+                        "format": "text"
+                    },
+                    "language": {
+                        "label": "Language",
+                        "format": "text"
+                    },
+                    "qualityScore": {
+                        "label": "Quality",
+                        "format": "number"
+                    },
+                    "aiProbabilityBefore": {
+                        "label": "AI before",
+                        "format": "number"
+                    },
+                    "aiProbabilityAfter": {
+                        "label": "AI after",
+                        "format": "number"
+                    },
+                    "aiProbability": {
+                        "label": "AI probability",
+                        "format": "number"
+                    },
+                    "verdict": {
+                        "label": "Verdict",
+                        "format": "text"
+                    },
+                    "original": {
+                        "label": "Input text",
+                        "format": "text"
+                    },
+                    "result": {
+                        "label": "Humanized text",
+                        "format": "text"
+                    }
+                }
+            }
+        }
+    }
+}

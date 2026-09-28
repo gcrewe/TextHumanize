@@ -1,0 +1,19 @@
+{
+    "$schema": "https://apify.com/schemas/v1/actor.ide.json",
+    "actorSpecification": 1,
+    "name": "text-humanize",
+    "title": "TextHumanize — AI text humanizer & AI detector",
+    "description": "Humanize AI-generated text, detect AI content, and analyze style with the TextHumanize 38-stage pipeline. Fully offline, 25 languages.",
+    "version": "0.1",
+    "buildTag": "latest",
+    "dockerfile": "./Dockerfile",
+    "readme": "./README.md",
+    "inputSchema": "./input_schema.json",
+    "outputSchema": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "minMemoryMbytes": 512,
+    "defaultMemoryMbytes": 1024,
+    "maxMemoryMbytes": 4096
+}
