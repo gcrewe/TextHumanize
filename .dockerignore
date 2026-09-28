@@ -23,5 +23,7 @@ examples/
 LICENSE
 COMMERCIAL.md
 *.txt
+# requirements.txt is needed to build the Apify Actor image.
+!requirements.txt
 .pre-commit-config.yaml
 .gitignore

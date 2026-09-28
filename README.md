@@ -1842,6 +1842,20 @@ docker run -p 8080:8080 texthumanize --api --port 8080
 docker run -v $(pwd):/data texthumanize /data/input.txt -o /data/output.txt -l en
 ```
 
+### Apify Actor
+
+This repository doubles as an [Apify Actor](https://apify.com/) — run the pipeline from the
+Apify Console or API without managing any infrastructure.
+
+```bash
+pip install apify-cli
+apify push   # builds and deploys the Actor from .actor/Dockerfile
+```
+
+The Actor offers three modes (`humanize`, `detect`, `analyze`), accepts a single text or a
+batch, and stores one dataset item per text plus a `SUMMARY` record in the key-value store.
+See [`.actor/README.md`](.actor/README.md) for the full input and output reference.
+
 ---
 
 ## ❓ FAQ & Troubleshooting

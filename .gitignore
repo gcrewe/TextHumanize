@@ -64,6 +64,9 @@ scripts/_dumps/
 .mypy_cache/
 .ruff_cache/
 
+# Apify Actor local run storage
+/storage/
+
 # Extracted sdists / dated scratch dirs (kept out of the repo root)
 /texthumanize-[0-9]*/
 /20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]/

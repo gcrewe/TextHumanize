@@ -1,0 +1,6 @@
+# Apify Actor dependencies.
+#
+# The texthumanize library itself is installed from this repository (editable)
+# in the Dockerfile; only its runtime dependency is listed here.
+apify >= 4.0.0, < 5.0.0
+numpy >= 1.21
